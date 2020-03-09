@@ -1,0 +1,9 @@
+.disabled {
+  /* pointer-events: none;
+  opacity: 1;
+  cursor: not-allowed; */
+}
+
+.custom {
+    width: 178px !important;
+}
