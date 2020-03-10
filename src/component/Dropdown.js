@@ -21,7 +21,20 @@ export default class Dropdown extends React.Component {
   handleClick = e => {
     let name = e.currentTarget.dataset.div_dropdown_id;
     let head = e.currentTarget.dataset.div_dropdownheader_id;
-    document.getElementById(head).innerHTML = name;
+    if(head === 'Gender' || head === 'Deal' || head === 'Investor'){
+     
+      document.getElementById(head).innerHTML = name;
+    }
+    
+    else{
+      
+      if(name === 'select'){
+        document.getElementById(head).innerHTML = head;
+      }else{
+        document.getElementById(head).innerHTML = head + ' ' + name;
+      }
+      
+    }
     if (name === "select") {
       this.props.clickHandler("");
     } else {
@@ -49,7 +62,7 @@ export default class Dropdown extends React.Component {
     if (show === false) {
       episodeComponent = (
         <div
-          className="btn btn-primary dropdown-toggle custom disabled"
+          className="btn btn-primary dropdown-toggle custom readable"
           onClick={this.showDropdownMenu}
           id={this.props.dropdowntitle}
         >
@@ -69,18 +82,46 @@ export default class Dropdown extends React.Component {
     }
     return (
       <div>
-        <div className="dropdown">
+        {/* <div className="dropdown btn btn-block">
+            {episodeComponent}
+            {this.state.displayMenu ? (
+              <ul>
+                <li
+                  onClick={this.handleClick}
+                  key={select}
+                  data-div_dropdown_id={select}
+                  data-div_dropdownheader_id={this.props.dropdowntitle}
+                >
+                  -- select --
+                </li>
+                {this.props.dropDownObj.map(obj => (
+                  <li
+                    onClick={this.handleClick}
+                    key={obj.value}
+                    data-div_dropdown_id={obj.value}
+                    data-div_dropdownheader_id={this.props.dropdowntitle}
+                  >
+                    {obj.value}
+                  </li>
+                ))}
+              </ul>
+            ) : null}
+          </div> */}
+
+        <div className="dropdown btn btn-block">
           {episodeComponent}
           {this.state.displayMenu ? (
             <ul>
-              <li
+              {/* <li
                 onClick={this.handleClick}
                 key={select}
                 data-div_dropdown_id={select}
                 data-div_dropdownheader_id={this.props.dropdowntitle}
+                className="text"
               >
                 -- select --
-              </li>
+              </li> */}
+              <li class="dropdown-header">-- select --</li>
               {this.props.dropDownObj.map(obj => (
                 <li
                   onClick={this.handleClick}

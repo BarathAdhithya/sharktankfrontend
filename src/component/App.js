@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-// import logo from "../logo.svg";
 import "./App.css";
-import DisplayTable from "./DisplayTable";
+import DatatablePage from "./DatatablePage";
 import Dropdown from "./Dropdown";
+import DisplayTable from "./DisplayTable";
 
 class App extends Component {
   constructor(props) {
@@ -27,7 +27,8 @@ class App extends Component {
       dealParam: "",
       deal: [{ value: "yes" }, { value: "no" }],
       episodeNo: "",
-      showEpisodeComponent: false
+      showEpisodeComponent: false,
+      displayTable: false
     };
     this.sendReq = this.sendReq.bind(this);
     this.seasonReqApi = this.seasonReqApi.bind(this);
@@ -110,9 +111,9 @@ class App extends Component {
       .then(res => res.json())
       .then(data => {
         this.setState({ companies: data });
-        console.log(this.state.companies);
       })
       .catch(console.log);
+    this.setState({ displayTable: true });
   }
 
   handleClickGender = genderName => {
@@ -163,14 +164,19 @@ class App extends Component {
     this.setState({ dealParam: deal });
   };
 
+  handleClickCompany = () =>{
+
+  }
+  
   render() {
     return (
       <div className="container main-container">
         <div class="title">
-          <h1>Company List</h1>
+          <h1>SHARKTANK</h1>
+          <h3>Search Module</h3>
         </div>
         <div className="search-block">
-          <div className="col-sm-12">
+          <div className="col-sm-12 removePadding">
             <div class="row search-row">
               {/* <div class="col-xs-3">
               <label for="ex1">Season</label>
@@ -184,7 +190,7 @@ class App extends Component {
             </div> */}
 
               <div class="col-sm-2">
-                <label for="ex3">Season</label>
+                {/* <label for="ex3">Season</label> */}
                 <Dropdown
                   clickHandler={this.handleClickSeason}
                   dropDownObj={this.state.seasons}
@@ -193,7 +199,7 @@ class App extends Component {
                 />
               </div>
               <div class="col-sm-2">
-                <label for="ex3">Episode</label>
+                {/* <label for="ex3">Episode</label> */}
                 <Dropdown
                   clickHandler={this.handleClickEpisode}
                   dropDownObj={this.state.episodes}
@@ -203,7 +209,7 @@ class App extends Component {
                 />
               </div>
               <div class="col-sm-2">
-                <label for="ex3">Gender</label>
+                {/* <label for="ex3">Gender</label> */}
                 <Dropdown
                   clickHandler={this.handleClickGender}
                   dropDownObj={this.state.genders}
@@ -211,7 +217,7 @@ class App extends Component {
                 />
               </div>
               <div class="col-sm-2">
-                <label for="ex3">Deal</label>
+                {/* <label for="ex3">Deal</label> */}
                 <Dropdown
                   clickHandler={this.handleClickDeal}
                   dropDownObj={this.state.deal}
@@ -219,7 +225,7 @@ class App extends Component {
                 />
               </div>
               <div class="col-sm-2">
-                <label for="ex3">Investor</label>
+                {/* <label for="ex3">Investor</label> */}
                 <Dropdown
                   clickHandler={this.handleClickInvestor}
                   dropDownObj={this.state.investors}
@@ -227,9 +233,8 @@ class App extends Component {
                 />
               </div>
               <div class="col-sm-2">
-                <label for="ex3">submit</label>
                 <button
-                  className="btn btn-success btn-block"
+                  className="btn btn-primary btn-submit dropdown"
                   onClick={this.sendReq}
                 >
                   Submit
@@ -237,7 +242,13 @@ class App extends Component {
               </div>
             </div>
 
-            <DisplayTable companies={this.state.companies}></DisplayTable>
+            {/* <DatatablePage companies={this.state.companies}></DatatablePage> */}
+            {this.state.displayTable && (
+              <DisplayTable
+                companies={this.state.companies}
+                clickHandler={this.handleClickCompany}
+              ></DisplayTable>
+            )}
           </div>
         </div>
       </div>

@@ -1,9 +1,8 @@
-.disabled {
-  /* pointer-events: none;
-  opacity: 1;
-  cursor: not-allowed; */
+.readable {
+  opacity: .1 !important;
 }
 
-.custom {
-    width: 178px !important;
+.down {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
 }
